@@ -2,8 +2,6 @@ package database
 
 import (
 	"os"
-
-	"github.com/sirupsen/logrus"
 )
 
 type Database struct {
@@ -18,9 +16,9 @@ func New() *Database {
 	return &Database{}
 }
 
-func (database *Database) Setup(logger *logrus.Logger) {
+func (database *Database) Setup() {
 	if os.Getenv("DATABASE_NAME") == "" {
-		database.Name = "postgres"
+		database.Name = "ms-user"
 		database.Host = "localhost"
 		database.Port = "5432"
 		database.Username = "postgres"

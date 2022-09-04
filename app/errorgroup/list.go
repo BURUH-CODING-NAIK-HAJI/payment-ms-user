@@ -31,4 +31,12 @@ var (
 		Code:    http.StatusBadRequest,
 		Message: "BAD_REQUEST",
 	}
+	REGISTER_FAILED = Error{
+		Code:    http.StatusBadRequest,
+		Message: "REGISTER_FAILED",
+	}
+	USERNAME_ALREADY_TAKEN = Error{
+		Code:    http.StatusBadRequest,
+		Message: "USERNAME_ALREADY_TAKEN",
+	}
 )

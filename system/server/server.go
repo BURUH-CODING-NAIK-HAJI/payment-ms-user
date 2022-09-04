@@ -6,19 +6,19 @@ import (
 	"os"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/rizface/golang-api-template/app/controller/welcomecontroller"
-	"github.com/rizface/golang-api-template/app/repository/welcomerepository"
-	"github.com/rizface/golang-api-template/app/service/welcomeservice"
+	"github.com/rizface/golang-api-template/app/controller/usercontroller"
+	"github.com/rizface/golang-api-template/app/repository/profilerepository"
+	"github.com/rizface/golang-api-template/app/repository/userrepository"
+	"github.com/rizface/golang-api-template/app/service/userservice"
+	"gorm.io/gorm"
 )
 
-func SetupController(router *chi.Mux) {
-	// SETUP WELCOME REPOSITORY
-	welcomerepository := welcomerepository.New()
-	// SETUP WELCOME SERVICE
-	welcomeService := welcomeservice.New(welcomerepository)
-	// SETUP WELCOME CONTROLLER
-	welcomeController := welcomecontroller.New(welcomeService)
-	welcomecontroller.Setup(router, welcomeController)
+func SetupController(router *chi.Mux, postgres *gorm.DB) {
+	userrepository := userrepository.New()
+	profilerepository := profilerepository.New()
+	userservice := userservice.New(userrepository, profilerepository, postgres)
+	userController := usercontroller.New(userservice)
+	usercontroller.Setup(router, userController)
 }
 
 func CreateHttpServer(router http.Handler) *http.Server {
