@@ -26,10 +26,8 @@ func New(userservice userservice.UserServiceInterface) UserControllerInterface {
 }
 
 func Setup(router *chi.Mux, controller UserControllerInterface) {
-	router.Route("/v1/users", func(r chi.Router) {
-		r.Post("/", controller.Create)
-		r.Get("/{username}/resources", controller.FindOneByUsername)
-	})
+	router.Post("/", controller.Create)
+	router.Get("/{username}/resources", controller.FindOneByUsername)
 }
 
 func (controller *UserController) Create(w http.ResponseWriter, r *http.Request) {
