@@ -2,6 +2,7 @@ package postgresql
 
 import (
 	"fmt"
+	"time"
 
 	databaseconfig "github.com/rizface/golang-api-template/database"
 	"gorm.io/driver/postgres"
@@ -19,5 +20,11 @@ func NewConnection(dbConfig *databaseconfig.Database) *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+	sqlDb, _ := db.DB()
+	sqlDb.SetConnMaxIdleTime(10 * time.Minute)
+	sqlDb.SetMaxIdleConns(10)
+	sqlDb.SetMaxOpenConns(100)
+	sqlDb.SetConnMaxLifetime(2 * time.Hour)
+
 	return db
 }
