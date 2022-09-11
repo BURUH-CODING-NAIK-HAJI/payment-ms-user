@@ -5,3 +5,4 @@
 
 # TODO
 - [ ] Add Centralized Logging Service, Hope Can Implement ELK Stack
+- [ ] Move authentication process (compare password) from ms-auth to ms-user, because there is an endpoint should not showed to public.
