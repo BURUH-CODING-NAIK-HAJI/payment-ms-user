@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/rizface/golang-api-template/app/entity/requestentity"
+	"github.com/rizface/golang-api-template/app/entity/responseentity"
 	"github.com/rizface/golang-api-template/app/errorgroup"
 	"github.com/rizface/golang-api-template/app/service/userservice"
 )
@@ -43,11 +44,19 @@ func (controller *UserController) Create(w http.ResponseWriter, r *http.Request)
 	}
 
 	result := controller.userservice.Create(payload)
-	json.NewEncoder(w).Encode(result)
+	json.NewEncoder(w).Encode(responseentity.Response{
+		Code:    http.StatusOK,
+		Message: "SUCCESS",
+		Data:    result,
+	})
 }
 
 func (controller *UserController) FindOneByUsername(w http.ResponseWriter, r *http.Request) {
 	username := chi.URLParam(r, "username")
 	result := controller.userservice.FindOneByUsername(username)
-	json.NewEncoder(w).Encode(result)
+	json.NewEncoder(w).Encode(responseentity.Response{
+		Code:    http.StatusOK,
+		Message: "SUCCESS",
+		Data:    result,
+	})
 }
